@@ -1,4 +1,4 @@
-# Automatic Notes Generator - Audio to Notes
+# Automatic Notes Generator
 
 ## Overview
 
