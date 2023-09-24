@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request
-from text_summary import summarizer
+from text_summarizer import summarizer
 
 app = Flask(__name__)
 @app.route("/")
