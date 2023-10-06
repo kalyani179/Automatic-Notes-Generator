@@ -2,14 +2,19 @@ import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from string import punctuation
 from heapq import nlargest
+from transformers import T5Tokenizer, TFT5ForConditionalGeneration
 
-test = """A black hole is a fascinating and enigmatic celestial object in the universe. It's formed from the remnants of massive stars that have undergone a supernova explosion. What makes black holes unique is their incredibly strong gravitational pull, so intense that nothing, not even light, can escape from their grasp. This property is often described as an "event horizon," a boundary beyond which anything is inexorably drawn into the black hole.
+tokenizer = T5Tokenizer.from_pretrained('SJ-Ray/Re-Punctuate')
+model = TFT5ForConditionalGeneration.from_pretrained('SJ-Ray/Re-Punctuate')
 
-Black holes come in different sizes, ranging from stellar-mass black holes, which are several times the mass of our Sun, to supermassive black holes found at the centers of galaxies, which can be millions or even billions of times the mass of the Sun. These supermassive black holes play a crucial role in the formation and evolution of galaxies.
+input_text = """what is time dilation will according to Einstein special theory of relativity the difference in the ellipse time as measured by two clocks is called time dilation simply remember that time dilation is the slowing down of time in different frame of reference time dilation occurs due to difference in relative velocity and difference in gravitational field for example consider a man standing on the earth and another man travelling in the space shape let the time on the earth is 5 and the time in the space ship is also 5 o'clock in physics the man standing on the earth is one frame of reference and the main travelling in the space ship is another frame of reference the time appears normal for both men and their respective frame of reference I mean for the man standing on the earth the time is 5:00"""
+inputs = tokenizer.encode("punctuate: " + input_text, return_tensors="tf") 
+result = model.generate(inputs)
 
-The study of black holes has opened up new avenues for understanding the fundamental principles of physics, particularly in the realms of general relativity and quantum mechanics. Black holes have been the subject of intense scientific research and have captured the public's imagination, leading to numerous depictions in popular culture.
+decoded_output = tokenizer.decode(result[0], skip_special_tokens=True)
 
-Recent advancements in astrophysical observations, such as the detection of gravitational waves from merging black holes, have provided unprecedented insights into these cosmic enigmas. They continue to be a subject of great intrigue and exploration in the field of astrophysics."""
+test = decoded_output
+print(test)
 
 def summarizer():
   stopwords = list(STOP_WORDS)
@@ -50,13 +55,9 @@ def summarizer():
 
   #print(sent_scores)
 
-
   select_len = int(len(sent_tokens) * 0.3)
   summary = nlargest(select_len,sent_scores,key=sent_scores.get)
-  res = ""
-  for word in summary:
-    res+=word.text
-  print(res)
-  return res
-
-
+  final_summary= [word.text for word in summary]
+  summary = ' '.join(final_summary)
+  return summary
+print(summarizer())
