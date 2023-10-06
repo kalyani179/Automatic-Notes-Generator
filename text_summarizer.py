@@ -3,6 +3,7 @@ from spacy.lang.en.stop_words import STOP_WORDS
 from string import punctuation
 from heapq import nlargest
 from transformers import T5Tokenizer, TFT5ForConditionalGeneration
+from summarizer import Summarizer,TransformerSummarizer
 
 tokenizer = T5Tokenizer.from_pretrained('SJ-Ray/Re-Punctuate')
 model = TFT5ForConditionalGeneration.from_pretrained('SJ-Ray/Re-Punctuate')
@@ -15,7 +16,7 @@ def punctuator(input_text):
   decoded_output = tokenizer.decode(result[0], skip_special_tokens=True)
   return decoded_output
 
-def summarizer(test):
+def summarizer_extractive(test):
   stopwords = list(STOP_WORDS)
   # print(stopwords)
   # print(punctuation)
@@ -57,5 +58,10 @@ def summarizer(test):
   select_len = int(len(sent_tokens) * 0.3)
   summary = nlargest(select_len,sent_scores,key=sent_scores.get)
   final_summary= [word.text for word in summary]
-  speech_summary = ' '.join(final_summary)
-  return speech_summary
+  summary = ' '.join(final_summary)
+  return summary
+
+def summarizer_abstractive(test):
+    GPT2_model = TransformerSummarizer(transformer_type="GPT2",transformer_model_key="gpt2-medium")
+    summary = ''.join(GPT2_model(test))
+    return summary
