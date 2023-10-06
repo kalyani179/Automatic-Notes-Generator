@@ -32,7 +32,7 @@ def index():
             #speechSummary = summarizer_extractive(text)
             speechSummary = summarizer_abstractive(text)
 
-    return render_template('index.html', transcript=transcript,speechSummary=speechSummary)
+    return render_template('index.html', transcript=text,speechSummary=speechSummary)
 
 
 if __name__ == "__main__":

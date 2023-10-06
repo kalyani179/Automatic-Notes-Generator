@@ -1,4 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&family=Poppins&display=swap');
+body {
+    background-color: #0c0c24;
+    color: #fff;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.heading {
+    margin-top: 2%;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+}
+
 .flex-container {
     display: flex;
-    width: 300px;
+    flex-direction: row;
+    width: 340px;
+    gap: 50px;
+    margin: 5%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group {
+    margin-top: 10%;
+    margin-left: -5%;
+}
+
+.transcribe {
+    background-color: orange;
+    color: #fff;
+}
+
+#inputContainer,
+.speechContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 50px;
+    text-align: justify;
+}
+
+.speechContainer {
+    margin-top: 3%;
+}
+
+#speechTranscriptContainer,
+#speechSummaryContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    border-radius: 21.5px;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.10);
+    padding: 2%;
+    width: 31.5%;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
