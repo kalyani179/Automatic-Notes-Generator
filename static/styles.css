@@ -9,7 +9,7 @@ body::-webkit-scrollbar {
 }
 
 .heading {
-    margin-top: 2%;
+    margin-top: 3%;
     text-align: center;
     font-family: 'Merriweather', serif;
 }
@@ -19,8 +19,17 @@ body::-webkit-scrollbar {
     flex-direction: row;
     width: 340px;
     gap: 50px;
-    margin: 5%;
+    margin: 7%;
     font-family: 'Poppins', sans-serif;
+}
+
+.text-container {
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.flex-container::-webkit-scrollbar {
+    display: none;
 }
 
 .form-group {
@@ -44,7 +53,7 @@ body::-webkit-scrollbar {
 }
 
 .speechContainer {
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 #speechTranscriptContainer,
